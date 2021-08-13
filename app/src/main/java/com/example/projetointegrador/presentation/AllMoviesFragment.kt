@@ -51,7 +51,6 @@ class AllMoviesFragment : Fragment() {
         containerGenres.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
-
         genresAdapter.genresChecked = { movieId4 ->
             if (movieId4.isEmpty())
                 viewModel.getInfos()
