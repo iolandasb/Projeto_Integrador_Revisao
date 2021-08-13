@@ -1,20 +1,9 @@
 package com.example.projetointegrador
 
 import junit.framework.Assert.assertEquals
-import org.junit.Assert
 import org.junit.Test
 
 class MoviesDetailsActivityUnitTest {
-
-    @Test
-    fun `validates a movie rating percentage`(){
-        val result = movieRating(8.1)
-        assertEquals("81%", result)
-    }
-
-    fun movieRating(userRating: Double) : String {
-        return "${"%.0f".format((userRating * 10.0))}%"
-    }
 
     @Test
     fun `validates the action of getting the year of a date`(){
@@ -27,7 +16,7 @@ class MoviesDetailsActivityUnitTest {
     }
 
     @Test
-    fun `returns a String in hours and minutes given a movie runtime of type Int in minutes`(){
+    fun `validates the transformation of a period in minutes to hours and minutes`(){
         val result = movieRuntime(132)
         assertEquals("2h 12min", result)
     }
@@ -37,6 +26,16 @@ class MoviesDetailsActivityUnitTest {
         val minutes = runtime%60
 
         return "%dh %dmin".format(hours, minutes)
+    }
+
+    @Test
+    fun `validates a movie rating percentage`(){
+        val result = movieRating(8.1)
+        assertEquals("81%", result)
+    }
+
+    fun movieRating(userRating: Double) : String {
+        return "${"%.0f".format((userRating * 10.0))}%"
     }
 
 }

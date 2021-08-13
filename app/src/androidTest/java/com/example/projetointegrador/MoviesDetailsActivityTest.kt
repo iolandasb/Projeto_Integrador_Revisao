@@ -13,7 +13,7 @@ import com.example.projetointegrador.presentation.MoviesDetailsActivity
 @RunWith(AndroidJUnit4::class)
 class MoviesDetailsActivityTest {
 
-    //Na tela inicial, quando o usuário clicar no botão, deve-se verificar a efetividade desse elemento (botão).
+    //On the movies details screen, when the user clicks on the button to return to the Home Page, the effectiveness of this element (button) must be verified.
 
     @get:Rule
     val mainActivity = ActivityScenarioRule(MoviesDetailsActivity::class.java)

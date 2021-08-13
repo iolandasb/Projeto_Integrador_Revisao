@@ -27,7 +27,7 @@ class MainActivityTest {
         onView(withId(R.id.edtSearch)).perform(typeText("Test"))
     }
 
-    //On the home page, when the user leaves the movie search text box blank and clicks on the search button, it should be sent to the visualization of elements that inform that the movie was not found, and among them there is a fixed text that refers back to the home page. Therefore, when clicking on this fixed text, the effectiveness of this element (fixed text) must be verified.
+    //On the initial screen, when the user leaves the movie search text box blank and clicks on the search button, it should be sent to the visualization of elements that inform that the movie was not found, and among them there is a fixed text that refers back to the Home Page. Therefore, when clicking on this fixed text, the effectiveness of this element (fixed text) must be verified.
 
     @Test
     fun start_tryAgain()  {
