@@ -17,16 +17,17 @@ class MainActivityTest {
     @get:Rule
     val mainActivity = ActivityScenarioRule(MainActivity::class.java)
 
-    //Na tela inicial, quando o usuário clicar no botão, deve-se verificar a efetividade desse elemento (botão).
-    //Na tela inicial, quando o usuário digitar um filme na caixa de texto, deve-se verificar a efetividade desse elemento (caixa de texto).
+
+    //On the initial screen, when the user clicks on the button, the effectiveness of this element (button) must be verified.
+    //On the initial screen, when the user types a movie in the text box, the effectiveness of this element (text box) must be verified.
 
     @Test
     fun start_search()  {
         onView(withId(R.id.btnSearch)).perform(click())
-        onView(withId(R.id.edtSearch)).perform(typeText("Teste"))
+        onView(withId(R.id.edtSearch)).perform(typeText("Test"))
     }
 
-    //Na tela inicial, quando o usuário deixar em branco a caixa de texto de busca de filmes e clicar no botão pesquisar, ele será remetido à visualização do texto fixo que remete à página inicial, portanto ao clicar nesse texto fixo, deve-se verificar a efetividade desse elemento (texto fixo).
+    //On the home page, when the user leaves the movie search text box blank and clicks on the search button, it should be sent to the visualization of elements that inform that the movie was not found, and among them there is a fixed text that refers back to the home page. Therefore, when clicking on this fixed text, the effectiveness of this element (fixed text) must be verified.
 
     @Test
     fun start_tryAgain()  {
@@ -36,30 +37,5 @@ class MainActivityTest {
     }
 
 }
-
-/*protected var driver: AndroidDriver<MobileElement>? = null
-
-@Test
-fun start_search()  {
-    var edtSearch : MobileElement = driver!!.findElement(By.id(R.id.edtSearch.toString()))
-    //var btnSearch : MobileElement = driver!!.findElement(By.id(R.id.btnSearch.toString()))
-
-
-    //onView(withId(R.id.btnSearch)).perform(click())
-    onView(withId(R.id.edtSearch))
-        .perform(click())
-        .check()
-
-    onView(allOf(withId(R.id.btnSearch), withText("Hello!")))
-
-    //.check(matches(withText("Hello Espresso!").toString())
-
-    edtSearch.sendKeys("Sandy")
-    btnSearch.click()
-
-    var Z = edtSearch.text
-    Assert.assertEquals("Sandy", Z)
-}*/
-
 
 
