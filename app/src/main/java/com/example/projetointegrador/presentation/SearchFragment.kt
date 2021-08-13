@@ -1,5 +1,6 @@
 package com.example.projetointegrador.presentation
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -85,6 +86,7 @@ class SearchFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun update(querySearch: Uri) {
         setupSearchObserveList()
         viewModel.getSearch(querySearch)

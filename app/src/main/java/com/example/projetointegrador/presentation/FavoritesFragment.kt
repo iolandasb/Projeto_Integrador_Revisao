@@ -1,5 +1,6 @@
 package com.example.projetointegrador.presentation
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +16,7 @@ import com.example.projetointegrador.data.model.Infos
 import com.example.projetointegrador.presentation.adapters.GenresAdapter
 import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 
-class FavoritesFragment : Fragment(){
+class FavoritesFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
 
@@ -52,22 +53,21 @@ class FavoritesFragment : Fragment(){
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         genresAdapter.genresChecked = { movieId4 ->
-            if (movieId4.isEmpty())
+            /*if (movieId4.isEmpty())
                 viewModel.getFavoriteMovies()
-            else
+            else*/
                 viewModel.getGenresFavorites(movieId4)
         }
 
         setupFavoritesObserveList()
         setupGenresObserveList()
-
+        viewModel.getAllGenresInfos()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
         super.onResume()
         viewModel.getFavoriteMovies()
-        viewModel.getAllGenresInfos()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

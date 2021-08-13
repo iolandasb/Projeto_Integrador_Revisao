@@ -1,5 +1,6 @@
 package com.example.projetointegrador.presentation
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,6 +61,7 @@ class AllMoviesFragment : Fragment() {
 
         setupObserveList()
         setupGenresObserveList()
+        viewModel.getInfos()
         viewModel.getAllGenresInfos()
     }
 
@@ -74,6 +76,9 @@ class AllMoviesFragment : Fragment() {
         if (isChecked) {
             movie.favoriteCheck = true
             viewModel.addFavorite(movie)
+        } else{
+            movie.favoriteCheck = false
+            viewModel.removeFavorite(movie)
         }
     }
 

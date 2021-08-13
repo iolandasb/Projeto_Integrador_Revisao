@@ -11,7 +11,7 @@ import com.google.android.material.chip.Chip
 
 class GenresAdapter (val context: Context, var dataSetGenres: MutableList<AllMoviesGenres> = mutableListOf()) : RecyclerView.Adapter<GenresAdapter.RecyclerviewViewHolder>() {
 
-    var genresChecked : (movieId4: List<Int>) -> Unit ={}
+    var genresChecked : (movieId4: List<Int>) -> Unit = {}
     private val selectGenres: MutableList<Int> = mutableListOf()
 
     class RecyclerviewViewHolder(view: View) : RecyclerView.ViewHolder(view){

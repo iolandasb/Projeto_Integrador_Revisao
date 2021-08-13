@@ -3,6 +3,7 @@ package com.example.projetointegrador.presentation
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +13,7 @@ import com.example.projetointegrador.data.repository.Favorites
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MoviesViewModel  : ViewModel() {
+class MoviesViewModel : ViewModel() {
 
     private val _moviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
     val moviesLiveData: LiveData<MutableList<Infos>> = _moviesLiveData
@@ -44,9 +45,6 @@ class MoviesViewModel  : ViewModel() {
         fetchMoviesUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 favorites.setList(it.results)
                 _moviesLiveData.value = favorites.listFavoritesMovies()
@@ -59,9 +57,6 @@ class MoviesViewModel  : ViewModel() {
         fetchDetailsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 _moviesDetailsLiveData.value = it
             }
@@ -73,27 +68,18 @@ class MoviesViewModel  : ViewModel() {
         fetchCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 _castLiveData.value = it.cast
             }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")
     fun getAllGenresInfos() {
         val fetchAllGenresCastUseCase = FetchAllGenresUseCase()
         fetchAllGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                //var errorActivity = ErrorActivity()
-                //print(errorActivity)
-                //var intent = getIntent(this, ErrorActivity::class.java)
-                //var intent = requireActivity(), get.(ErrorActivity::class.java)
-                //_allGenresLiveData.value = it.startActivity(intent)
-            }
             .subscribe {
                 _allGenresLiveData.value = it.genres
             }
@@ -105,9 +91,6 @@ class MoviesViewModel  : ViewModel() {
         fetchGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 _allGenresLiveData.value = it.genres
             }
@@ -126,9 +109,6 @@ class MoviesViewModel  : ViewModel() {
         fetchSelectGenresUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 _moviesLiveData.value = it.results
             }
@@ -140,9 +120,6 @@ class MoviesViewModel  : ViewModel() {
         fetchRuntimeUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 _runtimeLiveData.value = it
             }
@@ -154,9 +131,6 @@ class MoviesViewModel  : ViewModel() {
         fetchSearchUseCase.execute()
             .subscribeOn(Schedulers.io()) //Processamento de entrada e saída de dados.
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-
-            }
             .subscribe {
                 _searchLiveData.value = it.results
             }
