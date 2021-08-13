@@ -1,9 +1,6 @@
 package com.example.projetointegrador.presentation
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,7 +17,7 @@ import com.example.projetointegrador.presentation.adapters.FragmentAdapter
 import com.example.projetointegrador.presentation.adapters.GenresAdapter
 import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ErrorListener {
 
     private lateinit var searchButton : ImageButton
     private var searchText : EditText? = null
@@ -39,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var genresAdapter: GenresAdapter
     lateinit var containerGenres: RecyclerView
 
-    private val viewModel = MoviesViewModel()
+    private val viewModel = MoviesViewModel(this)
 
     val pageAdapter by lazy { FragmentAdapter(this)
 
@@ -50,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Pesquisa por gênero não funciona aqui.
         containerGenres = findViewById(R.id.rcvAllMoviesTypes)
         genresAdapter = GenresAdapter(context = this)
         containerGenres.adapter = genresAdapter
@@ -79,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         searchButton?.setOnClickListener {
-            //A tela de filme não é encontrado só é ativada para o campo de pesquisa vazio. Ele não aparece se o filme digitado efetivamente não for encontrado.
             if (searchText?.text!!.isNotEmpty()) {
                 tablayout.visibility = View.GONE
                 viewpager.visibility = View.GONE
@@ -111,7 +106,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //Pesquisa por gênero não funciona aqui. Esse comando apenas volta para a tela inicial.
         genresAdapter.genresChecked = { movieId4 ->
             if (movieId4.isNotEmpty())
                 viewModel.getGenresSelect(movieId4)
@@ -128,7 +122,6 @@ class MainActivity : AppCompatActivity() {
                 searchText?.text?.clear()
         }
 
-        //Pesquisa por gênero não funciona aqui.
         setupGenresObserveList()
         viewModel.getAllGenresInfos()
 
@@ -146,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             searchText?.text?.clear()
         }
 
-}
+    }
 
     fun setupGenresObserveList() {
         viewModel.allGenresLiveData.observe(this,
@@ -166,6 +159,11 @@ class MainActivity : AppCompatActivity() {
             1 -> "Favoritos"
             else -> ""
         }
+    }
+
+    override fun pageError() {
+        val intent = Intent(this, ErrorActivity::class.java)
+        this?.startActivity(intent)
     }
 
 }
