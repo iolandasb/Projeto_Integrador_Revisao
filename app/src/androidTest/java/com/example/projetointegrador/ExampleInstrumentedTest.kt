@@ -1,5 +1,6 @@
 package com.example.projetointegrador
 
+import androidx.test.espresso.Espresso
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -21,4 +22,15 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.example.projetointegrador", appContext.packageName)
     }
+
+    /*@get:Rule
+    val mainActivity = IntentsTestRule(MoviesAdapter::class.java)
+
+    @Test
+    fun when_click_on_FAB_go_to_FormActivity(){
+        //ACT
+        Espresso.onView(withId(R.id.fabNext)).perform(ViewActions.click())
+        //ASSERT
+        Intents.intended(hasComponent(MoviesDetailsActivity::class.java.name))
+    }*/
 }

@@ -1,8 +1,8 @@
-package com.example.projetointegrador.data.model
+package com.example.projetointegrador.data.repository
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import java.util.*
+import com.example.projetointegrador.data.model.Infos
 import kotlin.collections.ArrayList
 
 class Favorites {

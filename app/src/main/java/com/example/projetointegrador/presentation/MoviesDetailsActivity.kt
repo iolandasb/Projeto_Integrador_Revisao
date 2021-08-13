@@ -12,6 +12,7 @@ import com.example.projetointegrador.R
 import com.example.projetointegrador.data.model.Infos
 import com.example.projetointegrador.presentation.adapters.CastAdapter
 import com.example.projetointegrador.presentation.adapters.GenresAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 
 class MoviesDetailsActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class MoviesDetailsActivity : AppCompatActivity() {
     private lateinit var movieLength : TextView
     private lateinit var synopsis : TextView
     private lateinit var movieRating : TextView
-    private lateinit var returnButton : ImageButton
+    private lateinit var returnButton : FloatingActionButton
     private lateinit var favButton : ToggleButton
     private val viewModelDetails = MoviesViewModel()
 
@@ -91,6 +92,9 @@ class MoviesDetailsActivity : AppCompatActivity() {
             setupRuntimeObserveList(it.id)
         }
 
+        returnButton.setOnClickListener{
+            finish()
+        }
     }
 
     fun setupObserveDetailsList(movieId : Int) {

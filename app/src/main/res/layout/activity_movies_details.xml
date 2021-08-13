@@ -94,15 +94,17 @@
             tools:ignore="MissingConstraints"
             tools:listitem="@layout/activity_movies_type" />
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@android:color/transparent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#A1FFFFFF"
             android:contentDescription="@string/return_home"
             android:src="@drawable/ic_arrow"
+            app:borderWidth="0dp"
+            app:fabSize="mini"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
