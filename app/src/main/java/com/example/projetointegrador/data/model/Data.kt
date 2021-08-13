@@ -11,6 +11,7 @@ data class Infos (val id: Int,
                   val backdrop_path : String,
                   val overview : String,
                   val release_date : String,
+                  val genre_ids : List<Int>,
                   val runtime : Int?,
                   var favoriteCheck : Boolean = false): Parcelable
 

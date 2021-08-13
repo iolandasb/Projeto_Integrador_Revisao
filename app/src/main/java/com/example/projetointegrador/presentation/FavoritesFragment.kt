@@ -7,15 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetointegrador.R
+import com.example.projetointegrador.data.model.Infos
 import com.example.projetointegrador.presentation.adapters.GenresAdapter
 import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 
 class FavoritesFragment : Fragment(){
 
-    private val viewModel = MoviesViewModel()
+    private lateinit var viewModel: MoviesViewModel
 
     lateinit var listAdapter: MoviesAdapter
     lateinit var container: RecyclerView
@@ -35,39 +37,46 @@ class FavoritesFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
+
         container = view.findViewById(R.id.rcvContainer)
-        listAdapter = MoviesAdapter(context = view.context)
+        listAdapter = MoviesAdapter(favoritechecked = ::onFavoriteIconClick)
         container.adapter = listAdapter
-        container.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        container.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         containerGenres = view.findViewById(R.id.rcvAllMoviesTypes)
         genresAdapter = GenresAdapter(context = view.context)
         containerGenres.adapter = genresAdapter
-        containerGenres.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        containerGenres.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
-        listAdapter.favoritechecked = { movie, isChecked ->
-            if (!isChecked) {/*
-                movie.favoriteCheck = true
-                viewModel.addFavorite(movie)
-            }else{*/
-                movie.favoriteCheck = false
-                viewModel.removeFavorite(movie.id)
-            }
-        }
-
-        genresAdapter.genresChecked = { movieId ->
-            if (movieId.isEmpty())
-                viewModel.getInfos()
+        genresAdapter.genresChecked = { movieId4 ->
+            if (movieId4.isEmpty())
+                viewModel.getFavoriteMovies()
             else
-                viewModel.getGenresSelect(movieId)
+                viewModel.getGenresFavorites(movieId4)
         }
 
         setupFavoritesObserveList()
-        viewModel.getFavoriteMovies()
-
         setupGenresObserveList()
-        viewModel.getAllGenresInfos()
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFavoriteMovies()
+        viewModel.getAllGenresInfos()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun onFavoriteIconClick(movie: Infos, isChecked: Boolean) {
+        if (!isChecked) {
+            movie.favoriteCheck = false
+            viewModel.removeFavorite(movie)
+            viewModel.getFavoriteMovies()
+        }
     }
 
     fun setupFavoritesObserveList() {

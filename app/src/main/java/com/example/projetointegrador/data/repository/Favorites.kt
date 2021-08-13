@@ -3,25 +3,32 @@ package com.example.projetointegrador.data.repository
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.projetointegrador.data.model.Infos
-import kotlin.collections.ArrayList
 
 class Favorites {
 
    @RequiresApi(Build.VERSION_CODES.N)
-    open fun addToFavorites(movie: Infos) {
-        favoritesList.putIfAbsent(movie.id, movie)
+
+   fun setList(movies: MutableList<Infos>) {
+       favoritesList.addAll(movies)
+   }
+
+    fun addToFavorites(movie: Infos) {
+        val position = favoritesList.indexOf(movie)
+        favoritesList[position] = favoritesList[position].copy(favoriteCheck = true)
     }
 
-    fun removeFromFavorites(movieId : Int) {
-        favoritesList.remove(movieId)
+    fun removeFromFavorites(movie: Infos) {
+        val index = favoritesList.indexOf(movie)
+        favoritesList[index] = favoritesList[index].copy(favoriteCheck = false)
     }
 
     fun listFavoritesMovies(): MutableList<Infos> {
-        return ArrayList(favoritesList.values)
+        return favoritesList
     }
 
     private companion object {
-        val favoritesList : MutableMap<Int, Infos> = mutableMapOf()
+        val favoritesList: MutableList<Infos> = mutableListOf()
     }
+
 
 }

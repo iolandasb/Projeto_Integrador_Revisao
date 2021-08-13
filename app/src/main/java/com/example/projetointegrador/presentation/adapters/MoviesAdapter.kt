@@ -1,6 +1,5 @@
 package com.example.projetointegrador.presentation.adapters
 
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
@@ -16,9 +15,10 @@ import com.example.projetointegrador.data.model.Infos
 import com.bumptech.glide.Glide
 import com.example.projetointegrador.presentation.MoviesDetailsActivity
 
-class MoviesAdapter(val context: Context, var dataSet: MutableList<Infos> = mutableListOf()) : RecyclerView.Adapter<MoviesAdapter.RecyclerviewViewHolder>() {
-
-    var favoritechecked : (movie: Infos, isChecked: Boolean) -> Unit = { _, _ ->}
+class MoviesAdapter(
+    var dataSet: MutableList<Infos> = mutableListOf(),
+    private var favoritechecked: (movie: Infos, isChecked: Boolean) -> Unit
+) : RecyclerView.Adapter<MoviesAdapter.RecyclerviewViewHolder>() {
 
     class RecyclerviewViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var imageMovie = view.findViewById<ImageView>(R.id.imgMovie)
@@ -34,15 +34,19 @@ class MoviesAdapter(val context: Context, var dataSet: MutableList<Infos> = muta
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: RecyclerviewViewHolder, position: Int) {
 
-        if(dataSet[position].poster_path !== ""){
-            holder.imageMovie?.let { Glide.with(context).load("https://image.tmdb.org/t/p/w500" + dataSet[position].poster_path).into(it) }
+        if (dataSet[position].poster_path !== "") {
+            holder.imageMovie?.let {
+                Glide.with(holder.imageMovie.context)
+                    .load("https://image.tmdb.org/t/p/w500" + dataSet[position].poster_path)
+                    .into(it)
+            }
         }
         holder.movieTitle.text = dataSet[position].title
-        holder.rating.text = dataSet[position].vote_average.toString()  + " %"
+        holder.rating.text = dataSet[position].vote_average.toString() + " %"
         holder.imageMovie?.setOnClickListener {
-            val intent = Intent(context, MoviesDetailsActivity::class.java)
+            val intent = Intent(it.context, MoviesDetailsActivity::class.java)
             intent.putExtra("movies", dataSet[position])
-            context.startActivity(intent)
+            it.context.startActivity(intent)
         }
 
         holder.favoriteButton?.isChecked = dataSet[position].favoriteCheck

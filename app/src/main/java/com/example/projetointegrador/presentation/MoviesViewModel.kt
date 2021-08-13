@@ -37,6 +37,7 @@ class MoviesViewModel  : ViewModel() {
 
     var favorites = Favorites()
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")
     fun getInfos() {
         val fetchMoviesUseCase = FetchMoviesUseCase()
@@ -47,7 +48,8 @@ class MoviesViewModel  : ViewModel() {
 
             }
             .subscribe {
-                _moviesLiveData.value = it.results
+                favorites.setList(it.results)
+                _moviesLiveData.value = favorites.listFavoritesMovies()
             }
     }
 
@@ -98,7 +100,7 @@ class MoviesViewModel  : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresInfos(movieId3 : Int) {
+    fun getGenresInfos(movieId3: Int) {
         val fetchGenresCastUseCase = FetchGenresUseCase(movieId3 = movieId3)
         fetchGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
@@ -109,6 +111,13 @@ class MoviesViewModel  : ViewModel() {
             .subscribe {
                 _allGenresLiveData.value = it.genres
             }
+    }
+
+    fun getGenresFavorites(genre_ids: List<Int>) {
+        val favoritesMovies = favorites.listFavoritesMovies()
+            .filter { infos -> infos.genre_ids.containsAll(genre_ids) }
+            .toMutableList()
+            _favoriteMoviesLiveData.value = favoritesMovies
     }
 
     @SuppressLint("CheckResult")
@@ -154,8 +163,8 @@ class MoviesViewModel  : ViewModel() {
     }
 
     fun getFavoriteMovies() {
-        val favoritesData = favorites.listFavoritesMovies()
-        _favoriteMoviesLiveData.value = favoritesData
+        val favoritesData = favorites.listFavoritesMovies().filter { it.favoriteCheck }
+        _favoriteMoviesLiveData.value = favoritesData as MutableList<Infos>
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -164,7 +173,7 @@ class MoviesViewModel  : ViewModel() {
         _favoriteMoviesLiveData.value = favorites.listFavoritesMovies()
     }
 
-    fun removeFavorite(movieId: Int) {
+    fun removeFavorite(movieId: Infos) {
         favorites.removeFromFavorites(movieId)
         _favoriteMoviesLiveData.value = favorites.listFavoritesMovies()
     }

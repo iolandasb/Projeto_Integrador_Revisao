@@ -30,7 +30,7 @@ class GenresAdapter (val context: Context, var dataSetGenres: MutableList<AllMov
             }else{
                 selectGenres.remove(dataSetGenres[position].id)
             }
-                genresChecked(selectGenres) //O comando está pegando a lista de "ids" gerados pela chamada e inserindo em uma "MutableList".
+                genresChecked(selectGenres)
         }
 
     }
