@@ -3,7 +3,6 @@ package com.example.projetointegrador.presentation
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,7 +30,6 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     val runtimeLiveData: LiveData<Runtime> = _runtimeLiveData
 
     val _favoriteMoviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
-    //val favoriteMoviesLiveData: LiveData<List<Infos>> = _favoriteMoviesLiveData //QUEM VÊ É A ACTIVITY
 
     private val _searchLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
     val searchLiveData: LiveData<MutableList<Infos>> = _searchLiveData
@@ -63,6 +61,19 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
                 _moviesDetailsLiveData.value = it
             },{
             error?.pageError()
+            })
+    }
+
+    @SuppressLint("CheckResult")
+    fun getMoviesRuntime(movieId5 : Int) {
+        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId5 = movieId5)
+        fetchRuntimeUseCase.execute()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({
+                _runtimeLiveData.value = it
+            },{
+                error?.pageError()
             })
     }
 
@@ -121,19 +132,6 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
                 _moviesLiveData.value = it.results
-            },{
-            error?.pageError()
-            })
-    }
-
-    @SuppressLint("CheckResult")
-    fun getMoviesRuntime(movieId5 : Int) {
-        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId5 = movieId5)
-        fetchRuntimeUseCase.execute()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
-                _runtimeLiveData.value = it
             },{
             error?.pageError()
             })
