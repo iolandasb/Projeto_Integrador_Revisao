@@ -13,6 +13,11 @@ class FetchDetailsUseCase(private val repository: MoviesRepository = MoviesRepos
     fun execute() = repository.fetchDetailsList(movieId)
 }
 
+class FetchRuntimeUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId5 : Int)
+{
+    fun execute() = repository.fetchRuntime(movieId5)
+}
+
 class FetchCastUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId2: Int)
 {
     fun execute() = repository.fetchCast(movieId2)
@@ -31,11 +36,6 @@ class FetchGenresUseCase(private val repository: MoviesRepository = MoviesReposi
 class FetchSelectGenresUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId4 : List<Int>)
 {
     fun execute() = repository.fetchSelectGenres(movieId4.joinToString(","))
-}
-
-class FetchRuntimeUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId5 : Int)
-{
-    fun execute() = repository.fetchRuntime(movieId5)
 }
 
 class FetchSearchUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieSearched: Uri)

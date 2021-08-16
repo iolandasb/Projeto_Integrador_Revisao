@@ -20,19 +20,19 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     private val _moviesDetailsLiveData = MutableLiveData<ReleaseDatesResponse>()
     val detailsLiveData: LiveData<ReleaseDatesResponse> = _moviesDetailsLiveData
 
+    private val _runtimeLiveData = MutableLiveData<Runtime>()
+    val runtimeLiveData: LiveData<Runtime> = _runtimeLiveData
+
     private val _castLiveData = MutableLiveData<List<InfosCast>>()
     val castLiveData: LiveData<List<InfosCast>> = _castLiveData
 
     private val _allGenresLiveData = MutableLiveData<List<AllMoviesGenres>>()
     val allGenresLiveData: LiveData<List<AllMoviesGenres>> = _allGenresLiveData
 
-    private val _runtimeLiveData = MutableLiveData<Runtime>()
-    val runtimeLiveData: LiveData<Runtime> = _runtimeLiveData
-
-    val _favoriteMoviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
-
     private val _searchLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
     val searchLiveData: LiveData<MutableList<Infos>> = _searchLiveData
+
+    val _favoriteMoviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
 
     var favorites = Favorites()
 
@@ -118,7 +118,7 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     fun getGenresFavorites(genre_ids: List<Int>) {
-        val favoritesMovies = favorites.listFavoritesMovies()
+        val favoritesMovies = favorites.listFavoritesMovies().filter { it.favoriteCheck }
             .filter { infos -> infos.genre_ids.containsAll(genre_ids) }
             .toMutableList()
             _favoriteMoviesLiveData.value = favoritesMovies

@@ -15,6 +15,9 @@ interface MoviesService {
     @GET("movie/{movie_id}/release_dates")
     fun getReleaseDate(@Path("movie_id") movie_id: Int) : Observable<ReleaseDatesResponse>
 
+    @GET("movie/{movie_id}")
+    fun getRuntime(@Path("movie_id") movie_id5: Int): Observable<Runtime>
+
     @GET("movie/{movie_id}/credits")
     fun getCast(@Path("movie_id") movie_id2: Int): Observable<ListCast>
 
@@ -26,9 +29,6 @@ interface MoviesService {
 
     @GET("discover/movie")
     fun getSelectGenres(@Query("with_genres", encoded = true) movie_id4: String): Observable<ListMovies>
-
-    @GET("movie/{movie_id}")
-    fun getRuntime(@Path("movie_id") movie_id5: Int): Observable<Runtime>
 
     @GET("search/movie")
     fun searchForMovie(@Query("query") movieSearched: Uri): Observable<ListMovies>

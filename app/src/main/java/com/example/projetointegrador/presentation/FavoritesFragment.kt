@@ -52,22 +52,17 @@ class FavoritesFragment : Fragment() {
         containerGenres.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
-        genresAdapter.genresChecked = { movieId4 ->
-            /*if (movieId4.isEmpty())
-                viewModel.getFavoriteMovies()
-            else*/
-                viewModel.getGenresFavorites(movieId4)
-        }
-
         setupFavoritesObserveList()
         setupGenresObserveList()
-        viewModel.getAllGenresInfos()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
         super.onResume()
         viewModel.getFavoriteMovies()
+        genresAdapter.genresChecked = { movieId4 ->
+            viewModel.getGenresFavorites(movieId4)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
