@@ -84,24 +84,30 @@ class SearchFragment : Fragment() {
             update(querySearch)
         }
 
+        setupSearchObserveList()
+        setupGenresObserveList()
+        setupObserveList()
+        setupFavoritesObserveList()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun update(querySearch: Uri) {
-        setupSearchObserveList()
         viewModel.getSearch(querySearch)
-        setupGenresObserveList()
-        viewModel.getAllGenresInfos()
-        setupObserveList()
-        setupFavoritesObserveList()
+        genresAdapter.genresChecked = { genre_ids ->
+            viewModel.getGenresSearch(genre_ids)
+        }
+        viewModel.getFavoriteMovies()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun onFavoriteIconClick(movie: Infos, isChecked: Boolean) {
         if (isChecked) {
             movie.favoriteCheck = true
-            Log.d("teste", movie.favoriteCheck.toString())
             viewModel.addFavorite(movie)
+        } else{
+            movie.favoriteCheck = false
+            viewModel.removeFavorite(movie)
         }
     }
 

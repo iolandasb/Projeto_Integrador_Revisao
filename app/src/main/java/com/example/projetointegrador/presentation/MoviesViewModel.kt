@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.example.projetointegrador.data.model.*
 import com.example.projetointegrador.data.repository.Favorites
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
@@ -117,13 +118,6 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
             })
     }
 
-    fun getGenresFavorites(genre_ids: List<Int>) {
-        val favoritesMovies = favorites.listFavoritesMovies().filter { it.favoriteCheck }
-            .filter { infos -> infos.genre_ids.containsAll(genre_ids) }
-            .toMutableList()
-            _favoriteMoviesLiveData.value = favoritesMovies
-    }
-
     @SuppressLint("CheckResult")
     fun getGenresSelect(movieId4 : List<Int>) {
         val fetchSelectGenresUseCase = FetchSelectGenresUseCase(movieId4 = movieId4)
@@ -141,13 +135,27 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     fun getSearch(movieSearched: Uri) {
         val fetchSearchUseCase = FetchSearchUseCase(movieSearched = movieSearched)
         fetchSearchUseCase.execute()
-            .subscribeOn(Schedulers.io()) //Processamento de entrada e saída de dados.
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
                 _searchLiveData.value = it.results
             },{
             error?.pageError()
             })
+    }
+
+    fun getGenresSearch(genre_ids: List<Int>) {
+        val searchGenres = _searchLiveData.value
+            ?.filter { movie -> movie.genre_ids.containsAll(genre_ids) }
+            ?.toMutableList()
+        _searchLiveData.value = searchGenres
+    }
+
+    fun getGenresFavorites(genre_ids: List<Int>) {
+        val favoritesMovies = favorites.listFavoritesMovies().filter { it.favoriteCheck }
+            .filter { infos -> infos.genre_ids.containsAll(genre_ids) }
+            .toMutableList()
+        _favoriteMoviesLiveData.value = favoritesMovies
     }
 
     fun getFavoriteMovies() {
