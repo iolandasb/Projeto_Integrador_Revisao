@@ -88,7 +88,10 @@ class SearchFragment : Fragment() {
     fun update(querySearch: Uri) {
         viewModel.getSearch(querySearch)
         genresAdapter.genresChecked = { genre_ids ->
-            viewModel.getGenresSearch(genre_ids)
+            if (genre_ids.isEmpty())
+                viewModel.getSearch(querySearch)
+            else
+                viewModel.getGenresSearch(genre_ids)
         }
         viewModel.getFavoriteMovies()
     }
