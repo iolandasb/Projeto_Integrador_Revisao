@@ -71,14 +71,7 @@ class SearchFragment : Fragment() {
         genresAdapter = GenresAdapter(context = view.context)
         containerGenres.adapter = genresAdapter
         containerGenres.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-
-        genresAdapter.genresChecked = { movieId4 ->
-            if (movieId4.isEmpty())
-                viewModel.getInfos()
-            else
-                viewModel.getGenresSelect(movieId4)
-        }
-
+        
         val querySearch = movieSearch?.toUri()
         if (querySearch != null) {
             update(querySearch)
