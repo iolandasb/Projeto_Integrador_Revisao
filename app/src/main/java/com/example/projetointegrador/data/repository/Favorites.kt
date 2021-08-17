@@ -14,7 +14,12 @@ class Favorites {
 
     fun addToFavorites(movie: Infos) {
         val position = favoritesList.indexOf(movie)
-        favoritesList[position] = favoritesList[position].copy(favoriteCheck = true)
+        if (position == -1) {
+            favoritesList.add(movie)
+            listFavoritesMovies()
+        } else {
+            favoritesList[position] = favoritesList[position].copy(favoriteCheck = true)
+        }
     }
 
     fun removeFromFavorites(movie: Infos) {

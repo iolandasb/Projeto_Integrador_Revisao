@@ -80,7 +80,6 @@ class SearchFragment : Fragment() {
         setupSearchObserveList()
         setupGenresObserveList()
         setupObserveList()
-        setupFavoritesObserveList()
 
     }
 
@@ -93,7 +92,6 @@ class SearchFragment : Fragment() {
             else
                 viewModel.getGenresSearch(genre_ids)
         }
-        viewModel.getFavoriteMovies()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
