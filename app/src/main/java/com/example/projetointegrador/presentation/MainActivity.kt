@@ -7,15 +7,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import androidx.viewpager2.widget.ViewPager2
 import com.example.projetointegrador.R
 import com.example.projetointegrador.presentation.adapters.FragmentAdapter
-import com.example.projetointegrador.presentation.adapters.GenresAdapter
-import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 
 class MainActivity : AppCompatActivity(), ErrorListener {
 
@@ -30,12 +26,6 @@ class MainActivity : AppCompatActivity(), ErrorListener {
     private lateinit var messageNotFound : TextView
     private lateinit var movieSearchText : String
 
-    lateinit var listAdapter: MoviesAdapter
-    lateinit var container: RecyclerView
-
-    lateinit var genresAdapter: GenresAdapter
-    lateinit var containerGenres: RecyclerView
-
     private val viewModel = MoviesViewModel(this)
 
     val pageAdapter by lazy { FragmentAdapter(this)
@@ -47,11 +37,6 @@ class MainActivity : AppCompatActivity(), ErrorListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        containerGenres = findViewById(R.id.rcvAllMoviesTypes)
-        genresAdapter = GenresAdapter(context = this)
-        containerGenres.adapter = genresAdapter
-        containerGenres.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
         searchButton = findViewById(R.id.btnSearch)
         searchText = findViewById(R.id.edtSearch)
         icon = findViewById(R.id.imgRectangle)
@@ -61,7 +46,6 @@ class MainActivity : AppCompatActivity(), ErrorListener {
         imageNotFound = findViewById(R.id.imgNotFound)
         textNotFound = findViewById(R.id.txtNot)
         messageNotFound = findViewById(R.id.txtMessage)
-        containerGenres = findViewById(R.id.rcvAllMoviesTypes)
 
         val viewpager = findViewById<ViewPager2>(R.id.viewpager)
         viewpager.adapter = FragmentAdapter(this)
@@ -74,7 +58,7 @@ class MainActivity : AppCompatActivity(), ErrorListener {
             }
         })
 
-        searchButton?.setOnClickListener {
+        searchButton.setOnClickListener {
             if (searchText?.text!!.isNotEmpty()) {
                 tablayout.visibility = View.GONE
                 viewpager.visibility = View.GONE
@@ -85,7 +69,6 @@ class MainActivity : AppCompatActivity(), ErrorListener {
                 imageNotFound.visibility = View.GONE
                 textNotFound.visibility = View.GONE
                 messageNotFound.visibility = View.GONE
-                containerGenres.visibility = View.GONE
 
                 movieSearchText = searchText?.text.toString()
                 val fragment = SearchFragment.searchString(movieSearchText)
@@ -102,28 +85,8 @@ class MainActivity : AppCompatActivity(), ErrorListener {
                 imageNotFound.visibility = View.VISIBLE
                 textNotFound.visibility = View.VISIBLE
                 messageNotFound.visibility = View.VISIBLE
-                containerGenres.visibility = View.VISIBLE
             }
         }
-
-        genresAdapter.genresChecked = { movieId4 ->
-            if (movieId4.isNotEmpty())
-                viewModel.getGenresSelect(movieId4)
-                tablayout.visibility = View.VISIBLE
-                viewpager.visibility = View.VISIBLE
-                icon.visibility = View.INVISIBLE
-                searchMode.visibility = View.INVISIBLE
-                tryAgain.visibility = View.INVISIBLE
-                searchFragment.visibility = View.INVISIBLE
-                imageNotFound.visibility = View.GONE
-                textNotFound.visibility = View.GONE
-                messageNotFound.visibility = View.GONE
-                containerGenres.visibility = View.GONE
-                searchText?.text?.clear()
-        }
-
-        setupGenresObserveList()
-        viewModel.getAllGenresInfos()
 
         tryAgain.setOnClickListener {
             tablayout.visibility = View.VISIBLE
@@ -135,23 +98,10 @@ class MainActivity : AppCompatActivity(), ErrorListener {
             imageNotFound.visibility = View.GONE
             textNotFound.visibility = View.GONE
             messageNotFound.visibility = View.GONE
-            containerGenres.visibility = View.GONE
             searchText?.text?.clear()
         }
 
     }
-
-    fun setupGenresObserveList() {
-        viewModel.allGenresLiveData.observe(this,
-            { response ->
-                response?.let {
-                    genresAdapter.dataSetGenres.clear()
-                    genresAdapter.dataSetGenres.addAll(it)
-                    genresAdapter.notifyDataSetChanged()
-                }
-            })
-    }
-
 
     private fun getTabTitle(position: Int): String {
         return when (position) {
@@ -163,7 +113,7 @@ class MainActivity : AppCompatActivity(), ErrorListener {
 
     override fun pageError() {
         val intent = Intent(this, ErrorActivity::class.java)
-        this?.startActivity(intent)
+        this.startActivity(intent)
     }
 
 }

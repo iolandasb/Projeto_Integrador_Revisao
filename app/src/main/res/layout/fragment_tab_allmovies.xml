@@ -38,6 +38,15 @@
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/fragment_movies" />
 
+        <include
+            android:id="@+id/vMovieNotFound"
+            layout="@layout/activity_movie_not_found"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/rcvAllMoviesTypes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

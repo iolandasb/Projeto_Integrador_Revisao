@@ -97,60 +97,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tablayout"  />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvAllMoviesTypes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    app:singleSelection="true"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="@+id/txtTryAgain"
-                    app:layout_constraintTop_toTopOf="@+id/txtTryAgain"
-                    tools:listitem="@layout/activity_movies_type" />
+        <ImageView
+            android:id="@+id/imgNotFound"
+            android:visibility="gone"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="180dp"
+            android:src="@drawable/ic_search_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imgNotFound"
-                    android:visibility="gone"
-                    android:layout_width="230dp"
-                    android:layout_height="230dp"
-                    android:layout_marginTop="180dp"
-                    android:src="@drawable/ic_search_error"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtNot"
+            android:visibility="gone"
+            style="@style/MovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:text="Esse filme não existe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgNotFound" />
 
-                <TextView
-                    android:id="@+id/txtNot"
-                    android:visibility="gone"
-                    style="@style/MovieTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_sans_regular"
-                    android:text="Esse filme não existe"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgNotFound" />
-
-                <TextView
-                    android:id="@+id/txtMessage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/nunito_sans_regular"
-                    android:paddingHorizontal="16dp"
-                    android:text="Não conseguimos encontrar o filme que você procura. Por favor, refaça sua busca."
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtNot" />
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:paddingHorizontal="16dp"
+            android:text="Não conseguimos encontrar o filme que você procura. Por favor, refaça sua busca."
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtNot" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
