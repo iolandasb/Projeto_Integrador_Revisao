@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModel
 import com.example.projetointegrador.data.model.*
 import com.example.projetointegrador.data.repository.Favorites
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
@@ -66,8 +65,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getMoviesRuntime(movieId5 : Int) {
-        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId5 = movieId5)
+    fun getMoviesRuntime(movieId3 : Int) {
+        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId3 = movieId3)
         fetchRuntimeUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -106,8 +105,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresInfos(movieId3: Int) {
-        val fetchGenresCastUseCase = FetchGenresUseCase(movieId3 = movieId3)
+    fun getGenresInfos(genre_id: Int) {
+        val fetchGenresCastUseCase = FetchGenresUseCase(genre_id = genre_id)
         fetchGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -119,8 +118,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresSelect(movieId4 : List<Int>) {
-        val fetchSelectGenresUseCase = FetchSelectGenresUseCase(movieId4 = movieId4)
+    fun getGenresSelect(genre_id2 : List<Int>) {
+        val fetchSelectGenresUseCase = FetchSelectGenresUseCase(genre_id2 = genre_id2)
         fetchSelectGenresUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -146,14 +145,14 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
 
     fun getGenresSearch(genre_ids: List<Int>) {
         val searchGenres = _searchLiveData.value
-            ?.filter { movie -> movie.genre_ids.containsAll(genre_ids) }
+            ?.filter { it.genre_ids.containsAll(genre_ids) }
             ?.toMutableList()
         _searchLiveData.value = searchGenres
     }
 
     fun getGenresFavorites(genre_ids: List<Int>) {
         val favoritesMovies = favorites.listFavoritesMovies().filter { it.favoriteCheck }
-            .filter { infos -> infos.genre_ids.containsAll(genre_ids) }
+            .filter { it.genre_ids.containsAll(genre_ids) }
             .toMutableList()
         _favoriteMoviesLiveData.value = favoritesMovies
     }

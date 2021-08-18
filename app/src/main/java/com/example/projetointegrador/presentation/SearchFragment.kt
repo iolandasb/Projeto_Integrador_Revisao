@@ -81,7 +81,6 @@ class SearchFragment : Fragment() {
 
         setupSearchObserveList()
         setupGenresObserveList()
-        setupObserveList()
         searchNotFound.visibility = View.GONE
 
     }
@@ -135,18 +134,6 @@ class SearchFragment : Fragment() {
                     genresAdapter.notifyDataSetChanged()
                 }
             })
-    }
-
-    fun setupObserveList() {
-        viewModel.moviesLiveData.observe(viewLifecycleOwner,
-            { response ->
-                response?.let {
-                    listAdapter.dataSet.clear()
-                    listAdapter.dataSet.addAll(it)
-                    listAdapter.notifyDataSetChanged()
-                }
-            }
-        )
     }
 
 }

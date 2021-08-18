@@ -42,7 +42,7 @@ class MoviesAdapter(
             }
         }
         holder.movieTitle.text = dataSet[position].title
-        holder.rating.text = dataSet[position].vote_average.toString() + " %"
+        holder.rating.text = convertRating(dataSet[position].vote_average)
         holder.imageMovie?.setOnClickListener {
             val intent = Intent(it.context, MoviesDetailsActivity::class.java)
             intent.putExtra("movies", dataSet[position])
@@ -58,5 +58,9 @@ class MoviesAdapter(
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun convertRating(userRating: Number): String {
+        return "${"%.0f".format((userRating.toDouble() * 10.0))}%"
+    }
 
 }

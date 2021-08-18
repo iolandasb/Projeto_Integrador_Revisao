@@ -3,7 +3,6 @@ package com.example.projetointegrador.presentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,7 +67,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         }
 
         if (infos != null) {
-            viewModel.getMoviesRuntime(movieId5 = infos.id)
+            viewModel.getMoviesRuntime(movieId3 = infos.id)
         }
 
         if (infos != null) {
@@ -76,13 +75,13 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         }
 
         if (infos != null) {
-            viewModel.getGenresInfos(movieId3 = infos.id)
+            viewModel.getGenresInfos(genre_id = infos.id)
         }
 
         infos?.let{
             Glide.with(this).load("https://image.tmdb.org/t/p/w500" + it.backdrop_path).into(movieImage)
             titleMovie.text = it.title
-            movieRating.text = it.vote_average.toString() + " %"
+            movieRating.text = convertRating(it.vote_average)
             synopsis.text = it.overview
             movieYear.text = it.release_date.substring(0,4)
             favButton.isChecked = it.favoriteCheck
@@ -112,11 +111,15 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         return (totalMinutes / 60).toString() + "h" + minutes + "min"
     }
 
-    fun setupRuntimeObserveList(movieId5 : Int) {
+    fun setupRuntimeObserveList(movieId3 : Int) {
         viewModel.runtimeLiveData.observe(this,
             {
                 movieLength.text = convertRuntime(it.runtime)
             })
+    }
+
+    fun convertRating(userRating: Number): String {
+        return "${"%.0f".format((userRating.toDouble() * 10.0))}%"
     }
 
     fun setupCastObserveList(movieId2 : Int) {
