@@ -70,7 +70,7 @@ class SearchFragment : Fragment() {
         container.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         containerGenres = view.findViewById(R.id.rcvAllMoviesTypes)
-        genresAdapter = GenresAdapter(context = view.context)
+        genresAdapter = GenresAdapter()
         containerGenres.adapter = genresAdapter
         containerGenres.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         

@@ -16,9 +16,9 @@ import com.example.projetointegrador.presentation.adapters.GenresAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 
-class MoviesDetailsActivity : AppCompatActivity() {
+class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
 
-    private val viewModel = MoviesViewModel()
+    private val viewModel = MoviesViewModel(this)
 
     lateinit var castAdapter: CastAdapter
     lateinit var containerCast: RecyclerView
@@ -52,12 +52,12 @@ class MoviesDetailsActivity : AppCompatActivity() {
         favButton = findViewById(R.id.btnFavorite)
 
         containerCast = findViewById(R.id.rcvMovieCast)
-        castAdapter = CastAdapter(context = this)
+        castAdapter = CastAdapter()
         containerCast.adapter = castAdapter
         containerCast.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         containerGenres = findViewById(R.id.rcvMovieGenres)
-        genresAdapter = GenresAdapter(context = this)
+        genresAdapter = GenresAdapter()
         containerGenres.adapter = genresAdapter
         containerGenres.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -139,5 +139,11 @@ class MoviesDetailsActivity : AppCompatActivity() {
             movieLength.text = convertRuntime(it.runtime)
             })
     }
+
+    override fun pageError() {
+        val intent = Intent(this, ErrorActivity::class.java)
+        startActivity(intent)
+    }
+
 
 }

@@ -9,7 +9,7 @@ import com.example.projetointegrador.R
 import com.example.projetointegrador.data.model.AllMoviesGenres
 import com.google.android.material.chip.Chip
 
-class GenresAdapter (val context: Context, var dataSetGenres: MutableList<AllMoviesGenres> = mutableListOf()) : RecyclerView.Adapter<GenresAdapter.RecyclerviewViewHolder>() {
+class GenresAdapter (var dataSetGenres: MutableList<AllMoviesGenres> = mutableListOf()) : RecyclerView.Adapter<GenresAdapter.RecyclerviewViewHolder>() {
 
     var genresChecked : (movieId4: List<Int>) -> Unit = {}
     private val selectGenres: MutableList<Int> = mutableListOf()
