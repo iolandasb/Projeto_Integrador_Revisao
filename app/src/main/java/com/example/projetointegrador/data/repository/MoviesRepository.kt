@@ -10,7 +10,7 @@ class MoviesRepository {
         return NetworkRetrofit.getService().getMovies()
     }
 
-    fun fetchDetailsList(movieId : Int) : Observable<ReleaseDatesResponse> {
+    fun fetchReleaseDate(movieId : Int) : Observable<ReleaseDatesResponse> {
         return NetworkRetrofit.getService().getReleaseDate(movieId)
     }
 

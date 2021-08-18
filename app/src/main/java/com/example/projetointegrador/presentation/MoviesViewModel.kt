@@ -18,8 +18,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     private val _moviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
     val moviesLiveData: LiveData<MutableList<Infos>> = _moviesLiveData
 
-    private val _moviesDetailsLiveData = MutableLiveData<ReleaseDatesResponse>()
-    val detailsLiveData: LiveData<ReleaseDatesResponse> = _moviesDetailsLiveData
+    private val _releaseDateLiveData = MutableLiveData<ReleaseDatesResponse>()
+    val releaseDateLiveData: LiveData<ReleaseDatesResponse> = _releaseDateLiveData
 
     private val _runtimeLiveData = MutableLiveData<Runtime>()
     val runtimeLiveData: LiveData<Runtime> = _runtimeLiveData
@@ -53,13 +53,13 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getInfosDetails(movieId : Int) {
-        val fetchDetailsUseCase = FetchDetailsUseCase(movieId = movieId)
+    fun getMoviesReleaseDate(movieId : Int) {
+        val fetchDetailsUseCase = FetchReleaseDateUseCase(movieId = movieId)
         fetchDetailsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
-                _moviesDetailsLiveData.value = it
+                _releaseDateLiveData.value = it
             },{
             error?.pageError()
             })

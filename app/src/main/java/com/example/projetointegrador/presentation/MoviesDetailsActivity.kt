@@ -64,7 +64,11 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         val infos = intent.extras?.get("movies") as Infos?
 
         if (infos != null) {
-            viewModelDetails.getInfosDetails(movieId = infos.id)
+            viewModelDetails.getMoviesReleaseDate(movieId = infos.id)
+        }
+
+        if (infos != null) {
+            viewModel.getMoviesRuntime(movieId5 = infos.id)
         }
 
         if (infos != null) {
@@ -75,10 +79,6 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
             viewModel.getGenresInfos(movieId3 = infos.id)
         }
 
-        if (infos != null) {
-            viewModel.getMoviesRuntime(movieId5 = infos.id)
-        }
-
         infos?.let{
             Glide.with(this).load("https://image.tmdb.org/t/p/w500" + it.backdrop_path).into(movieImage)
             titleMovie.text = it.title
@@ -87,10 +87,11 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
             movieYear.text = it.release_date.substring(0,4)
             favButton.isChecked = it.favoriteCheck
 
-            setupObserveDetailsList(it.id)
+            setupReleaseDateObserveList(it.id)
+            setupRuntimeObserveList(it.id)
             setupCastObserveList(it.id)
             setupGenresTypesObserveList(it.id)
-            setupRuntimeObserveList(it.id)
+
         }
 
         returnButton.setOnClickListener{
@@ -98,10 +99,23 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         }
     }
 
-    fun setupObserveDetailsList(movieId : Int) {
-        viewModelDetails.detailsLiveData.observe(this,
+    fun setupReleaseDateObserveList(movieId : Int) {
+        viewModelDetails.releaseDateLiveData.observe(this,
             {
                 certification.text = it.toString()
+            })
+    }
+
+    fun convertRuntime(totalMinutes: Int): String? {
+        var minutes = Integer.toString(totalMinutes % 60)
+        minutes = if (minutes.length == 1) "0$minutes" else minutes
+        return (totalMinutes / 60).toString() + "h" + minutes + "min"
+    }
+
+    fun setupRuntimeObserveList(movieId5 : Int) {
+        viewModel.runtimeLiveData.observe(this,
+            {
+                movieLength.text = convertRuntime(it.runtime)
             })
     }
 
@@ -124,19 +138,6 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
                     genresAdapter.dataSetGenres.addAll(it)
                     genresAdapter.notifyDataSetChanged()
                 }
-            })
-    }
-
-    fun convertRuntime(totalMinutes: Int): String? {
-        var minutes = Integer.toString(totalMinutes % 60)
-        minutes = if (minutes.length == 1) "0$minutes" else minutes
-        return (totalMinutes / 60).toString() + "h" + minutes + "min"
-    }
-
-    fun setupRuntimeObserveList(movieId5 : Int) {
-        viewModel.runtimeLiveData.observe(this,
-            {
-            movieLength.text = convertRuntime(it.runtime)
             })
     }
 

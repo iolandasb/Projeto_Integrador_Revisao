@@ -8,9 +8,9 @@ class FetchMoviesUseCase (private val repository: MoviesRepository = MoviesRepos
     fun execute() = repository.fetchList()
 }
 
-class FetchDetailsUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId: Int)
+class FetchReleaseDateUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId: Int)
 {
-    fun execute() = repository.fetchDetailsList(movieId)
+    fun execute() = repository.fetchReleaseDate(movieId)
 }
 
 class FetchRuntimeUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId5 : Int)

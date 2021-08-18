@@ -89,11 +89,11 @@ class SearchFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     fun update(querySearch: Uri) {
         viewModel.getSearch(querySearch)
-        genresAdapter.genresChecked = { genre_ids ->
-            if (genre_ids.isEmpty())
+        genresAdapter.genresChecked = {
+            if (it.isEmpty())
                 viewModel.getSearch(querySearch)
             else
-                viewModel.getGenresSearch(genre_ids)
+                viewModel.getGenresSearch(it)
         }
     }
 

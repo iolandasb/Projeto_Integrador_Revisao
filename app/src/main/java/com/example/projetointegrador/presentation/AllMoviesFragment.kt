@@ -1,6 +1,5 @@
 package com.example.projetointegrador.presentation
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,11 +51,11 @@ class AllMoviesFragment : Fragment() {
         containerGenres.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
-        genresAdapter.genresChecked = { movieId4 ->
-            if (movieId4.isEmpty())
+        genresAdapter.genresChecked = {
+            if (it.isEmpty())
                 viewModel.getInfos()
             else
-                viewModel.getGenresSelect(movieId4)
+                viewModel.getGenresSelect(it)
         }
 
         setupObserveList()

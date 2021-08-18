@@ -1,6 +1,5 @@
 package com.example.projetointegrador.presentation
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,8 +59,8 @@ class FavoritesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getFavoriteMovies()
-        genresAdapter.genresChecked = { movieId4 ->
-            viewModel.getGenresFavorites(movieId4)
+        genresAdapter.genresChecked = {
+            viewModel.getGenresFavorites(it)
         }
     }
 
