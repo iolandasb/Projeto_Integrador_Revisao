@@ -75,7 +75,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         }
 
         if (infos != null) {
-            viewModel.getGenresInfos(genre_id = infos.id)
+            viewModel.getGenresInfos(movie_id4 = infos.id)
         }
 
         infos?.let{

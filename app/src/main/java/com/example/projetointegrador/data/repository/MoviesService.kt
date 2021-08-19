@@ -25,10 +25,10 @@ interface MoviesService {
     fun getAllMoviesGenres(): Observable<ListAllMoviesGenres>
 
     @GET("movie/{movie_id}")
-    fun getGenres(@Path("movie_id") genre_id: Int): Observable<ListAllMoviesGenres>
+    fun getGenres(@Path("movie_id") movie_id4: Int): Observable<ListAllMoviesGenres>
 
     @GET("discover/movie")
-    fun getSelectGenres(@Query("with_genres") genre_id2: String): Observable<ListMovies>
+    fun getSelectGenres(@Query("with_genres") genre_id: String): Observable<ListMovies>
 
     @GET("search/movie")
     fun searchForMovie(@Query("query") movieSearched: Uri): Observable<ListMovies>

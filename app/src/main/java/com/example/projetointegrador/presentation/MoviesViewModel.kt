@@ -105,8 +105,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresInfos(genre_id: Int) {
-        val fetchGenresCastUseCase = FetchGenresUseCase(genre_id = genre_id)
+    fun getGenresInfos(movie_id4: Int) {
+        val fetchGenresCastUseCase = FetchGenresUseCase(movie_id4 = movie_id4)
         fetchGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -118,8 +118,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresSelect(genre_id2 : List<Int>) {
-        val fetchSelectGenresUseCase = FetchSelectGenresUseCase(genre_id2 = genre_id2)
+    fun getGenresSelect(genre_id : List<Int>) {
+        val fetchSelectGenresUseCase = FetchSelectGenresUseCase(genre_id = genre_id)
         fetchSelectGenresUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
