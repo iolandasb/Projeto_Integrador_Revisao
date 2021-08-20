@@ -1,4 +1,4 @@
-package com.example.projetointegrador.presentation
+package com.example.projetointegrador.presentation.favorites
 
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetointegrador.R
 import com.example.projetointegrador.data.model.Infos
+import com.example.projetointegrador.presentation.MoviesViewModel
 import com.example.projetointegrador.presentation.adapters.GenresAdapter
 import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 

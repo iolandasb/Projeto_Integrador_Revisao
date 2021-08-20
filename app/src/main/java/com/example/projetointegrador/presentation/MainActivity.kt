@@ -12,6 +12,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import androidx.viewpager2.widget.ViewPager2
 import com.example.projetointegrador.R
 import com.example.projetointegrador.presentation.adapters.FragmentAdapter
+import com.example.projetointegrador.presentation.error.ErrorActivity
+import com.example.projetointegrador.presentation.error.ErrorListener
+import com.example.projetointegrador.presentation.search.SearchFragment
 
 class MainActivity : AppCompatActivity(), ErrorListener {
 

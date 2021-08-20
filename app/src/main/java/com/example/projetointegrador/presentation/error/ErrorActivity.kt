@@ -1,4 +1,4 @@
-package com.example.projetointegrador.presentation
+package com.example.projetointegrador.presentation.error
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

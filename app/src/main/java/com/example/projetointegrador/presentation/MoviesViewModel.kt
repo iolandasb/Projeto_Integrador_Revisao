@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetointegrador.data.model.*
 import com.example.projetointegrador.data.repository.Movies
+import com.example.projetointegrador.presentation.error.ErrorListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projetointegrador.R
 import com.example.projetointegrador.data.model.Infos
 import com.bumptech.glide.Glide
-import com.example.projetointegrador.presentation.MoviesDetailsActivity
+import com.example.projetointegrador.presentation.moviesdetails.MoviesDetailsActivity
 
 class MoviesAdapter(
     var dataSet: MutableList<Infos> = mutableListOf(),

@@ -1,4 +1,4 @@
-package com.example.projetointegrador.presentation
+package com.example.projetointegrador.presentation.moviesdetails
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.projetointegrador.R
 import com.example.projetointegrador.data.model.Infos
+import com.example.projetointegrador.presentation.error.ErrorActivity
+import com.example.projetointegrador.presentation.error.ErrorListener
+import com.example.projetointegrador.presentation.MoviesViewModel
 import com.example.projetointegrador.presentation.adapters.CastAdapter
 import com.example.projetointegrador.presentation.adapters.GenresAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -8,7 +8,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.example.projetointegrador.presentation.MoviesDetailsActivity
+import com.example.projetointegrador.presentation.moviesdetails.MoviesDetailsActivity
 
 @RunWith(AndroidJUnit4::class)
 class MoviesDetailsActivityTest {

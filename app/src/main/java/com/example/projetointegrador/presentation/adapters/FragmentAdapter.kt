@@ -3,8 +3,8 @@ package com.example.projetointegrador.presentation.adapters
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.fragment.app.FragmentActivity
-import com.example.projetointegrador.presentation.AllMoviesFragment
-import com.example.projetointegrador.presentation.FavoritesFragment
+import com.example.projetointegrador.presentation.allmovies.AllMoviesFragment
+import com.example.projetointegrador.presentation.favorites.FavoritesFragment
 
 class FragmentAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     override fun getItemCount(): Int = 2
