@@ -19,11 +19,11 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
 
-    lateinit var listAdapter: MoviesAdapter
-    lateinit var container: RecyclerView
+    private lateinit var listAdapter: MoviesAdapter
+    private lateinit var container: RecyclerView
 
-    lateinit var genresAdapter: GenresAdapter
-    lateinit var containerGenres: RecyclerView
+    private lateinit var genresAdapter: GenresAdapter
+    private lateinit var containerGenres: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +42,12 @@ class FavoritesFragment : Fragment() {
         container = view.findViewById(R.id.rcvContainer)
         listAdapter = MoviesAdapter(favoritechecked = ::onFavoriteIconClick)
         container.adapter = listAdapter
-        container.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        container.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         containerGenres = view.findViewById(R.id.rcvAllMoviesTypes)
         genresAdapter = GenresAdapter()
         containerGenres.adapter = genresAdapter
-        containerGenres.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        containerGenres.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         setupFavoritesObserveList()
         setupGenresObserveList()
@@ -73,7 +71,7 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    fun setupFavoritesObserveList() {
+    private fun setupFavoritesObserveList() {
         viewModel._favoriteMoviesLiveData.observe(viewLifecycleOwner,
             { response ->
                 response?.let {
@@ -85,7 +83,7 @@ class FavoritesFragment : Fragment() {
         )
     }
 
-    fun setupGenresObserveList() {
+    private fun setupGenresObserveList() {
         viewModel.allGenresLiveData.observe(viewLifecycleOwner,
             { response ->
                 response?.let {

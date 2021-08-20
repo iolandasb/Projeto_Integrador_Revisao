@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetointegrador.data.model.*
-import com.example.projetointegrador.data.repository.Favorites
+import com.example.projetointegrador.data.repository.Movies
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -34,7 +34,7 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
 
     val _favoriteMoviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
 
-    var favorites = Favorites()
+    var favorites = Movies()
 
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")

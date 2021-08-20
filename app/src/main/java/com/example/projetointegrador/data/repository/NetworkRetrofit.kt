@@ -1,5 +1,6 @@
 package com.example.projetointegrador.data.repository
 
+import com.example.projetointegrador.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,6 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 object NetworkRetrofit {
+
+    const val baseUrl = "https://api.themoviedb.org/3/"
 
     fun getService(): MoviesService {
         val logging = HttpLoggingInterceptor()
@@ -27,7 +30,7 @@ object NetworkRetrofit {
         }
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(baseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())

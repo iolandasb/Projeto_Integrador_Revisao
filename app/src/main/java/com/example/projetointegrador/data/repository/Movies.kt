@@ -4,35 +4,35 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.projetointegrador.data.model.Infos
 
-class Favorites {
+class Movies {
 
    @RequiresApi(Build.VERSION_CODES.N)
 
    fun setList(movies: MutableList<Infos>) {
-       favoritesList.addAll(movies)
+       moviesList.addAll(movies)
    }
 
     fun addToFavorites(movie: Infos) {
-        val position = favoritesList.indexOf(movie)
+        val position = moviesList.indexOf(movie)
         if (position == -1) {
-            favoritesList.add(movie)
+            moviesList.add(movie)
             listFavoritesMovies()
         } else {
-            favoritesList[position] = favoritesList[position].copy(favoriteCheck = true)
+            moviesList[position] = moviesList[position].copy(favoriteCheck = true)
         }
     }
 
     fun removeFromFavorites(movie: Infos) {
-        val index = favoritesList.indexOf(movie)
-        favoritesList[index] = favoritesList[index].copy(favoriteCheck = false)
+        val index = moviesList.indexOf(movie)
+        moviesList[index] = moviesList[index].copy(favoriteCheck = false)
     }
 
     fun listFavoritesMovies(): MutableList<Infos> {
-        return favoritesList
+        return moviesList
     }
 
     private companion object {
-        val favoritesList: MutableList<Infos> = mutableListOf()
+        val moviesList: MutableList<Infos> = mutableListOf()
     }
 
 

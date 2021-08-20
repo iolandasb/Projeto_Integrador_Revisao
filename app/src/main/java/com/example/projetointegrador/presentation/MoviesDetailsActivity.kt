@@ -19,11 +19,11 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
 
     private val viewModel = MoviesViewModel(this)
 
-    lateinit var castAdapter: CastAdapter
-    lateinit var containerCast: RecyclerView
+    private lateinit var castAdapter: CastAdapter
+    private lateinit var containerCast: RecyclerView
 
-    lateinit var genresAdapter: GenresAdapter
-    lateinit var containerGenres: RecyclerView
+    private lateinit var genresAdapter: GenresAdapter
+    private lateinit var containerGenres: RecyclerView
 
     private lateinit var movieImage : ShapeableImageView
     private lateinit var titleMovie : TextView
@@ -98,20 +98,20 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         }
     }
 
-    fun setupReleaseDateObserveList(movieId : Int) {
+    private fun setupReleaseDateObserveList(movieId : Int) {
         viewModelDetails.releaseDateLiveData.observe(this,
             {
                 certification.text = it.toString()
             })
     }
 
-    fun convertRuntime(totalMinutes: Int): String? {
+    fun convertRuntime(totalMinutes: Int): String {
         var minutes = Integer.toString(totalMinutes % 60)
         minutes = if (minutes.length == 1) "0$minutes" else minutes
         return (totalMinutes / 60).toString() + "h" + minutes + "min"
     }
 
-    fun setupRuntimeObserveList(movieId3 : Int) {
+    private fun setupRuntimeObserveList(movieId3 : Int) {
         viewModel.runtimeLiveData.observe(this,
             {
                 movieLength.text = convertRuntime(it.runtime)
@@ -122,7 +122,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         return "${"%.0f".format((userRating.toDouble() * 10.0))}%"
     }
 
-    fun setupCastObserveList(movieId2 : Int) {
+    private fun setupCastObserveList(movieId2 : Int) {
         viewModel.castLiveData.observe(this,
             { response ->
                 response?.let {
@@ -133,7 +133,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
             })
     }
 
-    fun setupGenresTypesObserveList(movieId3 : Int) {
+    private fun setupGenresTypesObserveList(movieId3 : Int) {
         viewModel.allGenresLiveData.observe(this,
             { response ->
                 response?.let {

@@ -21,11 +21,11 @@ class SearchFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
 
-    lateinit var listAdapter: MoviesAdapter
-    lateinit var container: RecyclerView
+    private lateinit var listAdapter: MoviesAdapter
+    private lateinit var container: RecyclerView
 
-    lateinit var genresAdapter: GenresAdapter
-    lateinit var containerGenres: RecyclerView
+    private lateinit var genresAdapter: GenresAdapter
+    private lateinit var containerGenres: RecyclerView
 
     private lateinit var searchNotFound : View
 
@@ -86,7 +86,7 @@ class SearchFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun update(querySearch: Uri) {
+    private fun update(querySearch: Uri) {
         viewModel.getSearch(querySearch)
         genresAdapter.genresChecked = {
             if (it.isEmpty())
@@ -125,7 +125,7 @@ class SearchFragment : Fragment() {
             })
     }
 
-    fun setupGenresObserveList() {
+    private fun setupGenresObserveList() {
         viewModel.allGenresLiveData.observe(viewLifecycleOwner,
             { response ->
                 response?.let {

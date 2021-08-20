@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity(), ErrorListener {
                 imageNotFound.visibility = View.GONE
                 textNotFound.visibility = View.GONE
                 messageNotFound.visibility = View.GONE
-
                 movieSearchText = searchText?.text.toString()
                 val fragment = SearchFragment.searchString(movieSearchText)
                 supportFragmentManager.beginTransaction()
