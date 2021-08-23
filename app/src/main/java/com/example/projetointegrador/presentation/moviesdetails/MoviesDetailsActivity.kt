@@ -70,15 +70,15 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         }
 
         if (infos != null) {
-            viewModel.getMoviesRuntime(movieId3 = infos.id)
+            viewModel.getMoviesRuntime(movieId = infos.id)
         }
 
         if (infos != null) {
-            viewModel.getCastInfos(movieId2 = infos.id)
+            viewModel.getCastInfos(movieId = infos.id)
         }
 
         if (infos != null) {
-            viewModel.getGenresInfos(movie_id4 = infos.id)
+            viewModel.getGenresInfos(movieId = infos.id)
         }
 
         infos?.let{
@@ -114,7 +114,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         return (totalMinutes / 60).toString() + "h" + minutes + "min"
     }
 
-    private fun setupRuntimeObserveList(movieId3 : Int) {
+    private fun setupRuntimeObserveList(movieId : Int) {
         viewModel.runtimeLiveData.observe(this,
             {
                 movieLength.text = convertRuntime(it.runtime)
@@ -125,7 +125,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         return "${"%.0f".format((userRating.toDouble() * 10.0))}%"
     }
 
-    private fun setupCastObserveList(movieId2 : Int) {
+    private fun setupCastObserveList(movieId : Int) {
         viewModel.castLiveData.observe(this,
             { response ->
                 response?.let {
@@ -136,7 +136,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
             })
     }
 
-    private fun setupGenresTypesObserveList(movieId3 : Int) {
+    private fun setupGenresTypesObserveList(movieId : Int) {
         viewModel.allGenresLiveData.observe(this,
             { response ->
                 response?.let {
@@ -151,6 +151,5 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         val intent = Intent(this, ErrorActivity::class.java)
         startActivity(intent)
     }
-
 
 }

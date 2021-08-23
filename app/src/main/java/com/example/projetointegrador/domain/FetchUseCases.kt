@@ -13,14 +13,14 @@ class FetchReleaseDateUseCase(private val repository: MoviesRepository = MoviesR
     fun execute() = repository.fetchReleaseDate(movieId)
 }
 
-class FetchRuntimeUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId3 : Int)
+class FetchRuntimeUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId : Int)
 {
-    fun execute() = repository.fetchRuntime(movieId3)
+    fun execute() = repository.fetchRuntime(movieId)
 }
 
-class FetchCastUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId2: Int)
+class FetchCastUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId: Int)
 {
-    fun execute() = repository.fetchCast(movieId2)
+    fun execute() = repository.fetchCast(movieId)
 }
 
 class FetchAllGenresUseCase(private val repository: MoviesRepository = MoviesRepository())
@@ -28,14 +28,14 @@ class FetchAllGenresUseCase(private val repository: MoviesRepository = MoviesRep
     fun execute() = repository.fetchAllGenres()
 }
 
-class FetchGenresUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movie_id4: Int)
+class FetchGenresUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieId: Int)
 {
-    fun execute() = repository.fetchGenres(movie_id4)
+    fun execute() = repository.fetchGenres(movieId)
 }
 
-class FetchSelectGenresUseCase(private val repository: MoviesRepository = MoviesRepository(), private val genre_id : List<Int>)
+class FetchSelectGenresUseCase(private val repository: MoviesRepository = MoviesRepository(), private val genreId : List<Int>)
 {
-    fun execute() = repository.fetchSelectGenres(genre_id.joinToString(","))
+    fun execute() = repository.fetchSelectGenres(genreId.joinToString(","))
 }
 
 class FetchSearchUseCase(private val repository: MoviesRepository = MoviesRepository(), private val movieSearched: Uri)

@@ -14,24 +14,24 @@ class MoviesRepository {
         return NetworkRetrofit.getService().getReleaseDate(movieId)
     }
 
-    fun fetchRuntime(movieId3 : Int) : Observable<Runtime> {
-        return NetworkRetrofit.getService().getRuntime(movieId3)
+    fun fetchRuntime(movieId : Int) : Observable<Runtime> {
+        return NetworkRetrofit.getService().getRuntime(movieId)
     }
 
-    fun fetchCast(movieId2 : Int) : Observable<ListCast> {
-        return NetworkRetrofit.getService().getCast(movieId2)
+    fun fetchCast(movieId : Int) : Observable<ListCast> {
+        return NetworkRetrofit.getService().getCast(movieId)
     }
 
     fun fetchAllGenres() : Observable<ListAllMoviesGenres> {
         return NetworkRetrofit.getService().getAllMoviesGenres()
     }
 
-    fun fetchGenres(movie_id4 : Int) : Observable<ListAllMoviesGenres> {
-        return NetworkRetrofit.getService().getGenres(movie_id4)
+    fun fetchGenres(movieId : Int) : Observable<ListAllMoviesGenres> {
+        return NetworkRetrofit.getService().getGenres(movieId)
     }
 
-    fun fetchSelectGenres(genre_id : String) : Observable<ListMovies> {
-        return NetworkRetrofit.getService().getSelectGenres(genre_id)
+    fun fetchSelectGenres(genreId : String) : Observable<ListMovies> {
+        return NetworkRetrofit.getService().getSelectGenres(genreId)
     }
 
     fun fetchSearch(movieSearched: Uri) : Observable<ListMovies> {

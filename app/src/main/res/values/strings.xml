@@ -1,17 +1,22 @@
 <resources>
-    <string name="app_name">Projeto Integrador</string>
+
     <string name="all_movies">Todos os filmes</string>
-    <string name="favorites">Favoritos</string>
-    <string name="try_again">Tentar novamente</string>
+    <string name="app_name">Projeto Integrador</string>
+    <string name="back_beginning">Voltar ao início</string>
+    <string name="cast">Cast</string>
     <string name="failed">O sistema falhou</string>
+    <string name="favorites">Favoritos</string>
+    <string name="genres">Genres</string>
+    <string name="movie_banner">Movie Image</string>
+    <string name="movie_not_found">Não conseguimos encontrar o filme que você procura. Por favor, refaça sua busca.</string>
+    <string name="movie_rate">Movie Rating</string>
+    <string name="nonexistent">Esse filme não existe</string>
+    <string name="return_main">Return</string>
+    <string name="search_mode">Modo Pesquisa</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="text_view">Text View</string>
+    <string name="try_again">Tentar novamente</string>
     <string name="try_again_msg">Por algum motivo, não foi possível processar com essa solicitação. Por favor, tente novamente.</string>
-    <string name="search">Pesquisar por um filme...</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="users_review_txt">Avaliação dos usuários</string>
-    <string name="favorite">Favorito</string>
-    <string name="banner_description">Imagem do filme</string>
-    <string name="synopsis">Sinopse</string>
-    <string name="cast">Elenco</string>
-    <string name="return_home">Retornar</string>
-    <string name="movie_rate">Avaliação dos usuários</string>
+    <string name="users_rate">Avaliação dos usuários</string>
+
 </resources>

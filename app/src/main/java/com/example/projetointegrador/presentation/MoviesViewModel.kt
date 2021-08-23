@@ -66,8 +66,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getMoviesRuntime(movieId3 : Int) {
-        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId3 = movieId3)
+    fun getMoviesRuntime(movieId : Int) {
+        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId = movieId)
         fetchRuntimeUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -79,8 +79,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getCastInfos(movieId2 : Int) {
-        val fetchCastUseCase = FetchCastUseCase(movieId2 = movieId2)
+    fun getCastInfos(movieId : Int) {
+        val fetchCastUseCase = FetchCastUseCase(movieId = movieId)
         fetchCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -106,8 +106,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresInfos(movie_id4: Int) {
-        val fetchGenresCastUseCase = FetchGenresUseCase(movie_id4 = movie_id4)
+    fun getGenresInfos(movieId: Int) {
+        val fetchGenresCastUseCase = FetchGenresUseCase(movieId = movieId)
         fetchGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -119,8 +119,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresSelect(genre_id : List<Int>) {
-        val fetchSelectGenresUseCase = FetchSelectGenresUseCase(genre_id = genre_id)
+    fun getGenresSelect(genreId : List<Int>) {
+        val fetchSelectGenresUseCase = FetchSelectGenresUseCase(genreId = genreId)
         fetchSelectGenresUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -144,16 +144,16 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
             })
     }
 
-    fun getGenresSearch(genre_ids: List<Int>) {
+    fun getGenresSearch(genreId: List<Int>) {
         val searchGenres = _searchLiveData.value
-            ?.filter { it.genre_ids.containsAll(genre_ids) }
+            ?.filter { it.genre_ids.containsAll(genreId) }
             ?.toMutableList()
         _searchLiveData.value = searchGenres
     }
 
-    fun getGenresFavorites(genre_ids: List<Int>) {
+    fun getGenresFavorites(genreId: List<Int>) {
         val favoritesMovies = favorites.listFavoritesMovies().filter { it.favoriteCheck }
-            .filter { it.genre_ids.containsAll(genre_ids) }
+            .filter { it.genre_ids.containsAll(genreId) }
             .toMutableList()
         _favoriteMoviesLiveData.value = favoritesMovies
     }
@@ -164,8 +164,8 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun addFavorite(movie: Infos) {
-        favorites.addToFavorites(movie)
+    fun addFavorite(movieId: Infos) {
+        favorites.addToFavorites(movieId)
         _favoriteMoviesLiveData.value = favorites.listFavoritesMovies()
     }
 

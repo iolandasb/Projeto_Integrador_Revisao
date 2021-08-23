@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:layout_gravity=""
-            android:contentDescription="Movie Image"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/movie_banner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
@@ -25,15 +25,15 @@
 
         <ToggleButton
             android:id="@+id/btnFavorite"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/ic_favorite"
+            android:visibility="visible"
             android:checked="false"
+            android:layout_width="@dimen/vBigMargin"
+            android:layout_height="@dimen/vBigMargin"
+            android:background="@drawable/ic_favorite"
             android:text=""
             android:textOff=""
             android:textOn=""
-            android:visibility="visible"
+            android:layout_marginEnd="@dimen/vBigMargin"
             app:layout_constraintBottom_toBottomOf="@+id/txtTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtTitle"
@@ -41,53 +41,53 @@
 
         <TextView
             android:id="@+id/txtTitle"
-            style="@style/DetailedMovieTitle"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/width"
             app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgMovieBanner"
-            tools:text="Ford vs Ferrari" />
+            tools:text="Ford vs Ferrari"
+            style="@style/DetailedMovieTitle"/>
 
         <TextView
             android:id="@+id/txtMovieYear"
-            style="@style/InfoMovieDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin"
             app:layout_constraintStart_toStartOf="@+id/txtTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle"
-            tools:text="2020" />
+            tools:text="2020"
+            style="@style/InfoMovieDetailsText"/>
 
         <TextView
             android:id="@+id/txtPage"
-            style="@style/InfoMovieDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/bigMargin"
             app:layout_constraintStart_toEndOf="@+id/txtMovieYear"
             app:layout_constraintTop_toTopOf="@+id/txtMovieYear"
-            tools:text="PG-L" />
+            tools:text="PG-L"
+            style="@style/InfoMovieDetailsText" />
 
         <TextView
             android:id="@+id/txtMovieLength"
-            style="@style/InfoMovieDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/bigMargin"
             app:layout_constraintStart_toEndOf="@+id/txtPage"
             app:layout_constraintTop_toTopOf="@+id/txtPage"
-            tools:text="2h55min" />
+            tools:text="2h55min"
+            style="@style/InfoMovieDetailsText"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvMovieGenres"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="@+id/txtMovieYear"
             app:layout_constraintTop_toBottomOf="@+id/txtMovieYear"
@@ -98,11 +98,11 @@
             android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#A1FFFFFF"
-            android:contentDescription="@string/return_home"
+            android:backgroundTint="@color/arrow"
             android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/return_main"
+            android:layout_marginStart="@dimen/smallMargin"
+            android:layout_marginTop="@dimen/margin"
             app:borderWidth="0dp"
             app:fabSize="mini"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,40 +116,40 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.card.MaterialCardView
-                style="@style/LabelRatingCardView"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                app:cardElevation="16dp" />
+                app:cardElevation="@dimen/margin"
+                style="@style/LabelRatingCardView" />
 
         </FrameLayout>
 
         <TextView
             android:id="@+id/txtUsersRating"
-            style="@style/SmallRatingText"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:text="@string/users_rate"
+            android:layout_marginEnd="@dimen/margin"
             android:layout_marginBottom="50dp"
-            android:text="@string/users_review_txt"
             app:layout_constraintBottom_toTopOf="@+id/btnFavorite"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/RatingText" />
 
         <TextView
             android:id="@+id/txtMovieRating"
-            style="@style/PercentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/txtUsersRating"
             app:layout_constraintStart_toStartOf="@+id/txtUsersRating"
-            tools:text="81%" />
+            tools:text="81%"
+            style="@style/PercentText" />
 
         <ImageView
             android:id="@+id/imgLabelStar"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="@dimen/bigMargin"
+            android:layout_height="@dimen/bigMargin"
             android:contentDescription="@string/movie_rate"
             android:src="@drawable/ic_star"
+            android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/txtUsersRating"
             app:layout_constraintEnd_toStartOf="@+id/txtUsersRating"
             app:layout_constraintTop_toTopOf="@+id/txtMovieRating" />
@@ -158,8 +158,8 @@
             android:id="@+id/rcvMovieCast"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -169,23 +169,23 @@
 
         <TextView
             android:id="@+id/txtSinopsysTitle"
-            style="@style/TitlesInDetailedMovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/synopsis"
+            android:layout_marginTop="@dimen/margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txtMovieYear"
             app:layout_constraintTop_toBottomOf="@id/rcvMovieGenres"
-            tools:ignore="NotSibling" />
+            tools:ignore="NotSibling"
+            style="@style/TitlesInfoDetail" />
 
         <TextView
             android:id="@+id/txtSinopsys"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/vBigMargin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txtSinopsysTitle"
@@ -193,13 +193,13 @@
 
         <TextView
             android:id="@+id/txtCast"
-            style="@style/TitlesInDetailedMovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/cast"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@+id/txtSinopsys"
-            app:layout_constraintTop_toBottomOf="@+id/txtSinopsys" />
+            app:layout_constraintTop_toBottomOf="@+id/txtSinopsys"
+            style="@style/TitlesInfoDetail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

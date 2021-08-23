@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="vBigMargin">32dp</dimen>
+    <dimen name="bigMargin">24dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="smallMargin">8dp</dimen>
+    <dimen name="vSmallMargin">4dp</dimen>
+    <dimen name="bigTextSize">32sp</dimen>
+    <dimen name="textSize">16sp</dimen>
+    <dimen name="smallTextSize">12sp</dimen>
+    <dimen name="lineHeight">40dp</dimen>
+    <dimen name="width">52dp</dimen>
+
+</resources>
