@@ -19,10 +19,8 @@ import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 class AllMoviesFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
-
     private lateinit var listAdapter: MoviesAdapter
     private lateinit var container: RecyclerView
-
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var containerGenres: RecyclerView
 
@@ -74,7 +72,7 @@ class AllMoviesFragment : Fragment() {
         if (isChecked) {
             movie.favoriteCheck = true
             viewModel.addFavorite(movie)
-        } else{
+        } else {
             movie.favoriteCheck = false
             viewModel.removeFavorite(movie)
         }

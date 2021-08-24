@@ -19,17 +19,15 @@ import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 class FavoritesFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
-
     private lateinit var listAdapter: MoviesAdapter
     private lateinit var container: RecyclerView
-
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var containerGenres: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_tab_allmovies, container, false)
     }

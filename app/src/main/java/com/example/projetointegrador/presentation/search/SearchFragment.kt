@@ -21,15 +21,11 @@ import com.example.projetointegrador.presentation.adapters.MoviesAdapter
 class SearchFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
-
     private lateinit var listAdapter: MoviesAdapter
     private lateinit var container: RecyclerView
-
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var containerGenres: RecyclerView
-
-    private lateinit var searchNotFound : View
-
+    private lateinit var searchNotFound: View
     private var movieSearch: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +70,7 @@ class SearchFragment : Fragment() {
         genresAdapter = GenresAdapter()
         containerGenres.adapter = genresAdapter
         containerGenres.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        
+
         val querySearch = movieSearch?.toUri()
         if (querySearch != null) {
             update(querySearch)
@@ -102,21 +98,21 @@ class SearchFragment : Fragment() {
         if (isChecked) {
             movie.favoriteCheck = true
             viewModel.addFavorite(movie)
-        } else{
+        } else {
             movie.favoriteCheck = false
             viewModel.removeFavorite(movie)
         }
     }
 
-    private fun setupSearchObserveList(){
+    private fun setupSearchObserveList() {
         viewModel.searchLiveData.observe(viewLifecycleOwner,
             { response ->
-                response?.let{
+                response?.let {
                     if (it.isNullOrEmpty()) {
                         searchNotFound.visibility = View.VISIBLE
                         listAdapter.dataSet.clear()
                         listAdapter.notifyDataSetChanged()
-                    }else{
+                    } else {
                         searchNotFound.visibility = View.GONE
                         listAdapter.dataSet.clear()
                         listAdapter.dataSet.addAll(it)

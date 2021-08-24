@@ -13,7 +13,7 @@ interface MoviesService {
     fun getMovies(): Observable<ListMovies>
 
     @GET("movie/{movie_id}/release_dates")
-    fun getReleaseDate(@Path("movie_id") movieId: Int) : Observable<ReleaseDatesResponse>
+    fun getReleaseDate(@Path("movie_id") movieId: Int): Observable<ReleaseDatesResponse>
 
     @GET("movie/{movie_id}")
     fun getRuntime(@Path("movie_id") movieId: Int): Observable<Runtime>

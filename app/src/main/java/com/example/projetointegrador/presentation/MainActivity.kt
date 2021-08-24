@@ -18,22 +18,19 @@ import com.example.projetointegrador.presentation.search.SearchFragment
 
 class MainActivity : AppCompatActivity(), ErrorListener {
 
-    private lateinit var searchButton : ImageButton
-    private var searchText : EditText? = null
-    private lateinit var icon : ImageView
-    private lateinit var searchMode : TextView
-    private lateinit var tryAgain : TextView
-    private lateinit var searchFragment : FrameLayout
-    private lateinit var imageNotFound : ImageView
-    private lateinit var textNotFound : TextView
-    private lateinit var messageNotFound : TextView
-    private lateinit var movieSearchText : String
-
+    private lateinit var searchButton: ImageButton
+    private var searchText: EditText? = null
+    private lateinit var icon: ImageView
+    private lateinit var searchMode: TextView
+    private lateinit var tryAgain: TextView
+    private lateinit var searchFragment: FrameLayout
+    private lateinit var imageNotFound: ImageView
+    private lateinit var textNotFound: TextView
+    private lateinit var messageNotFound: TextView
+    private lateinit var movieSearchText: String
     private val viewModel = MoviesViewModel(this)
 
-    val pageAdapter by lazy { FragmentAdapter(this)
-
-    }
+    val pageAdapter by lazy { FragmentAdapter(this) }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +58,14 @@ class MainActivity : AppCompatActivity(), ErrorListener {
             }
         })
 
+        setupClickListeners(tablayout, viewpager)
+
+    }
+
+    private fun setupClickListeners(
+        tablayout: TabLayout,
+        viewpager: ViewPager2,
+    ) {
         searchButton.setOnClickListener {
             if (searchText?.text!!.isNotEmpty()) {
                 tablayout.visibility = View.GONE
@@ -102,7 +107,6 @@ class MainActivity : AppCompatActivity(), ErrorListener {
             messageNotFound.visibility = View.GONE
             searchText?.text?.clear()
         }
-
     }
 
     private fun getTabTitle(position: Int): String {

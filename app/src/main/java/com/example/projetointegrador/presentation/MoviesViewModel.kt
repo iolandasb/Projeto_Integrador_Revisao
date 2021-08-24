@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetointegrador.data.model.*
 import com.example.projetointegrador.data.repository.Movies
+import com.example.projetointegrador.domain.*
 import com.example.projetointegrador.presentation.error.ErrorListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -35,7 +36,7 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
 
     val _favoriteMoviesLiveData = MutableLiveData<MutableList<Infos>>(mutableListOf())
 
-    var favorites = Movies()
+    private var favorites = Movies()
 
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")
@@ -44,50 +45,50 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
         fetchMoviesUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 favorites.setList(it.results)
                 _moviesLiveData.value = favorites.listFavoritesMovies()
-            },{
-            error?.pageError()
-            })
-    }
-
-    @SuppressLint("CheckResult")
-    fun getMoviesReleaseDate(movieId : Int) {
-        val fetchDetailsUseCase = FetchReleaseDateUseCase(movieId = movieId)
-        fetchDetailsUseCase.execute()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
-                _releaseDateLiveData.value = it
-            },{
-            error?.pageError()
-            })
-    }
-
-    @SuppressLint("CheckResult")
-    fun getMoviesRuntime(movieId : Int) {
-        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId = movieId)
-        fetchRuntimeUseCase.execute()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
-                _runtimeLiveData.value = it
-            },{
+            }, {
                 error?.pageError()
             })
     }
 
     @SuppressLint("CheckResult")
-    fun getCastInfos(movieId : Int) {
+    fun getMoviesReleaseDate(movieId: Int) {
+        val fetchDetailsUseCase = FetchReleaseDateUseCase(movieId = movieId)
+        fetchDetailsUseCase.execute()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                _releaseDateLiveData.value = it
+            }, {
+                error?.pageError()
+            })
+    }
+
+    @SuppressLint("CheckResult")
+    fun getMoviesRuntime(movieId: Int) {
+        val fetchRuntimeUseCase = FetchRuntimeUseCase(movieId = movieId)
+        fetchRuntimeUseCase.execute()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                _runtimeLiveData.value = it
+            }, {
+                error?.pageError()
+            })
+    }
+
+    @SuppressLint("CheckResult")
+    fun getCastInfos(movieId: Int) {
         val fetchCastUseCase = FetchCastUseCase(movieId = movieId)
         fetchCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 _castLiveData.value = it.cast
-            },{
-            error?.pageError()
+            }, {
+                error?.pageError()
             })
     }
 
@@ -98,10 +99,10 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
         fetchAllGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 _allGenresLiveData.value = it.genres
-            },{
-            error?.pageError()
+            }, {
+                error?.pageError()
             })
     }
 
@@ -111,23 +112,23 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
         fetchGenresCastUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 _allGenresLiveData.value = it.genres
-            },{
-            error?.pageError()
+            }, {
+                error?.pageError()
             })
     }
 
     @SuppressLint("CheckResult")
-    fun getGenresSelect(genreId : List<Int>) {
+    fun getGenresSelect(genreId: List<Int>) {
         val fetchSelectGenresUseCase = FetchSelectGenresUseCase(genreId = genreId)
         fetchSelectGenresUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 _moviesLiveData.value = it.results
-            },{
-            error?.pageError()
+            }, {
+                error?.pageError()
             })
     }
 
@@ -137,10 +138,10 @@ class MoviesViewModel(private val error: ErrorListener? = null) : ViewModel() {
         fetchSearchUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 _searchLiveData.value = it.results
-            },{
-            error?.pageError()
+            }, {
+                error?.pageError()
             })
     }
 

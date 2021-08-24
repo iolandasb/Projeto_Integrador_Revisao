@@ -6,11 +6,11 @@ import com.example.projetointegrador.data.model.Infos
 
 class Movies {
 
-   @RequiresApi(Build.VERSION_CODES.N)
+    @RequiresApi(Build.VERSION_CODES.N)
 
-   fun setList(movies: MutableList<Infos>) {
-       moviesList.addAll(movies)
-   }
+    fun setList(movies: MutableList<Infos>) {
+        moviesList.addAll(movies)
+    }
 
     fun addToFavorites(movie: Infos) {
         val position = moviesList.indexOf(movie)

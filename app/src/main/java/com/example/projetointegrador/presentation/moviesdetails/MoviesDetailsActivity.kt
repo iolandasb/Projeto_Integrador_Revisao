@@ -21,23 +21,19 @@ import com.google.android.material.imageview.ShapeableImageView
 class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
 
     private val viewModel = MoviesViewModel(this)
-
     private lateinit var castAdapter: CastAdapter
     private lateinit var containerCast: RecyclerView
-
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var containerGenres: RecyclerView
-
-    private lateinit var movieImage : ShapeableImageView
-    private lateinit var titleMovie : TextView
-    private lateinit var movieYear : TextView
-    private lateinit var certification : TextView
-    private lateinit var movieLength : TextView
-    private lateinit var synopsis : TextView
-    private lateinit var movieRating : TextView
-    private lateinit var returnButton : FloatingActionButton
-    private lateinit var favButton : ToggleButton
-    private val viewModelDetails = MoviesViewModel()
+    private lateinit var movieImage: ShapeableImageView
+    private lateinit var titleMovie: TextView
+    private lateinit var movieYear: TextView
+    private lateinit var certification: TextView
+    private lateinit var movieLength: TextView
+    private lateinit var synopsis: TextView
+    private lateinit var movieRating: TextView
+    private lateinit var returnButton: FloatingActionButton
+    private lateinit var favButton: ToggleButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,66 +62,58 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
         val infos = intent.extras?.get("movies") as Infos?
 
         if (infos != null) {
-            viewModelDetails.getMoviesReleaseDate(movieId = infos.id)
-        }
-
-        if (infos != null) {
+            viewModel.getMoviesReleaseDate(movieId = infos.id)
             viewModel.getMoviesRuntime(movieId = infos.id)
-        }
-
-        if (infos != null) {
             viewModel.getCastInfos(movieId = infos.id)
-        }
-
-        if (infos != null) {
             viewModel.getGenresInfos(movieId = infos.id)
         }
 
-        infos?.let{
-            Glide.with(this).load("https://image.tmdb.org/t/p/w500" + it.backdrop_path).into(movieImage)
+        infos?.let {
+            Glide.with(this).load("https://image.tmdb.org/t/p/w500" + it.backdrop_path)
+                .into(movieImage)
             titleMovie.text = it.title
             movieRating.text = convertRating(it.vote_average)
             synopsis.text = it.overview
-            movieYear.text = it.release_date.substring(0,4)
+            movieYear.text = it.release_date.substring(0, 4)
             favButton.isChecked = it.favoriteCheck
 
-            setupReleaseDateObserveList(it.id)
-            setupRuntimeObserveList(it.id)
-            setupCastObserveList(it.id)
-            setupGenresTypesObserveList(it.id)
+            setupReleaseDateObserveList()
+            setupRuntimeObserveList()
+            setupCastObserveList()
+            setupGenresTypesObserveList()
 
         }
 
-        returnButton.setOnClickListener{
+        returnButton.setOnClickListener {
             finish()
         }
     }
 
-    private fun setupReleaseDateObserveList(movieId : Int) {
-        viewModelDetails.releaseDateLiveData.observe(this,
+    private fun setupReleaseDateObserveList() {
+        viewModel.releaseDateLiveData.observe(this,
             {
                 certification.text = it.toString()
             })
     }
 
-    fun convertRuntime(totalMinutes: Int): String {
-        var minutes = Integer.toString(totalMinutes % 60)
+    private fun convertRuntime(totalMinutes: Int): String {
+        var minutes = (totalMinutes % 60).toString()
         minutes = if (minutes.length == 1) "0$minutes" else minutes
         return (totalMinutes / 60).toString() + "h" + minutes + "min"
     }
 
-    private fun setupRuntimeObserveList(movieId : Int) {
+    private fun setupRuntimeObserveList() {
         viewModel.runtimeLiveData.observe(this,
             {
                 movieLength.text = convertRuntime(it.runtime)
             })
     }
 
-    fun convertRating(userRating: Number): String {
+    private fun convertRating(userRating: Number): String {
         return "${"%.0f".format((userRating.toDouble() * 10.0))}%"
     }
 
-    private fun setupCastObserveList(movieId : Int) {
+    private fun setupCastObserveList() {
         viewModel.castLiveData.observe(this,
             { response ->
                 response?.let {
@@ -136,7 +124,7 @@ class MoviesDetailsActivity : AppCompatActivity(), ErrorListener {
             })
     }
 
-    private fun setupGenresTypesObserveList(movieId : Int) {
+    private fun setupGenresTypesObserveList() {
         viewModel.allGenresLiveData.observe(this,
             { response ->
                 response?.let {

@@ -1,6 +1,5 @@
 package com.example.projetointegrador.presentation.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,24 +10,27 @@ import com.example.projetointegrador.R
 import com.example.projetointegrador.data.model.InfosCast
 import de.hdodenhof.circleimageview.CircleImageView
 
-class CastAdapter(var dataSetCast: MutableList<InfosCast> = mutableListOf()) : RecyclerView.Adapter<CastAdapter.RecyclerviewViewHolder>() {
+class CastAdapter(var dataSetCast: MutableList<InfosCast> = mutableListOf()) :
+    RecyclerView.Adapter<CastAdapter.RecyclerviewViewHolder>() {
 
-    class RecyclerviewViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        var picture = view.findViewById<CircleImageView>(R.id.imgPerson)
-        var characterName = view.findViewById<TextView>(R.id.txtName)
-        var role = view.findViewById<TextView>(R.id.txtRole)
+    class RecyclerviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var picture: CircleImageView = view.findViewById(R.id.imgPerson)
+        var characterName:TextView = view.findViewById(R.id.txtName)
+        var role:TextView = view.findViewById(R.id.txtRole)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerviewViewHolder = RecyclerviewViewHolder (
-        LayoutInflater.from(parent.context).inflate(R.layout.activity_cast, parent, false)
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerviewViewHolder =
+        RecyclerviewViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.activity_cast, parent, false)
+        )
 
     override fun onBindViewHolder(holder: RecyclerviewViewHolder, position: Int) {
-        if(dataSetCast[position].profile_path !== ""){
-            holder.picture?.let {
+        if (dataSetCast[position].profile_path !== "") {
+            holder.picture.let {
                 Glide.with(holder.picture.context)
                     .load("https://image.tmdb.org/t/p/w500" + dataSetCast[position].profile_path)
-                    .into(it) }
+                    .into(it)
+            }
         }
         holder.characterName.text = dataSetCast[position].name
         holder.role.text = dataSetCast[position].character

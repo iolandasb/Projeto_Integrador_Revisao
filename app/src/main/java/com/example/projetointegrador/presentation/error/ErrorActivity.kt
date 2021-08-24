@@ -8,8 +8,8 @@ import com.example.projetointegrador.R
 
 class ErrorActivity : AppCompatActivity() {
 
-    private lateinit var buttonClose : ImageButton
-    private lateinit var textTryAgain : TextView
+    private lateinit var buttonClose: ImageButton
+    private lateinit var textTryAgain: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +18,11 @@ class ErrorActivity : AppCompatActivity() {
         buttonClose = findViewById(R.id.btn_back)
         textTryAgain = findViewById(R.id.txt_try_again)
 
-        buttonClose.setOnClickListener{
+        buttonClose.setOnClickListener {
             finish()
         }
 
-        textTryAgain.setOnClickListener{
+        textTryAgain.setOnClickListener {
             finish()
         }
 
