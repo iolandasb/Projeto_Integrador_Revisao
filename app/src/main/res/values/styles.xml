@@ -4,7 +4,7 @@
     <style name="ButtonTry">
         <item name="android:fontFamily">@font/nunito_sans_regular</item>
         <item name="android:fontStyle" tools:targetApi="o">normal</item>
-        <item name="android:textColor">@color/greenPrimaryColor</item>
+        <item name="android:textColor">@color/green</item>
         <item name="android:textSize">@dimen/bigTextSize</item>
         <item name="android:textFontWeight" tools:targetApi="p">700</item>
         <item name="android:textAllCaps">false</item>
@@ -43,7 +43,7 @@
     <style name="Error">
         <item name="android:text">@string/try_again</item>
         <item name="android:textSize">@dimen/bigMargin</item>
-        <item name="android:textColor">@color/greenPrimaryColor</item>
+        <item name="android:textColor">@color/green</item>
         <item name="android:textStyle">bold</item>
     </style>
 
